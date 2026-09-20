@@ -1,0 +1,287 @@
+
+/* GERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica;
+}
+
+body {
+    background-color: #202124;
+}
+
+/* Cabeçalho */
+header {
+    border-bottom: 1px solid #ccc;
+    padding: 1rem 2rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#serach-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#search-input {
+    background-color: #525356;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    color: #ddd;
+    width: 400px;
+}
+
+#search-input::placeholder {
+    color: #ddd;
+}
+
+#export-notes {
+    background-color: #333;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    color: #fff;
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+#export-notes:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+/* Form de nova nota */
+#add-note-container {
+    display: flex;
+    width: 400px;
+    margin: 1rem auto 0;
+    gap: 1rem;
+}
+
+#add-note-container input,
+#add-note-container button {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#add-note-container input {
+    flex: 1;
+    background-color: transparent;
+    border: 1px solid #525356;
+    color: #fff;
+}
+
+#add-note-container button {
+    cursor: pointer;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Notas */
+#notes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 250px);
+    padding: 2rem;
+    gap: 2rem;
+}
+
+.note {
+    min-height: 200px;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    background-color: #202124;
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+}
+
+.note textarea {
+    background-color: transparent;
+    resize: none;
+    color: #fff;
+    border: none;
+    height: 100%;
+    width: 100%;
+    outline: none;
+}
+
+/* Tachinha - sempre visível */
+.note .bi-pin {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    font-size: 1.2rem;
+    background-color: #333;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+/* X e duplicar - escondidos */
+.note .bi-x-lg,
+.note .bi-file-earmark-plus {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: .9rem;
+    padding: 5px;
+    transition: .3s;
+    color: #555;
+    cursor: pointer;
+    opacity: 0;
+}
+
+/* Aparecem quando passar o mouse na nota */
+.note:hover .bi-x-lg,
+.note:hover .bi-file-earmark-plus {
+    opacity: 1;
+}
+
+/* Botão duplicar fica abaixo do X */
+.note .bi-file-earmark-plus {
+    top: 40px;
+}
+
+/* Efeito ao passar o mouse nos ícones */
+.note .bi-x-lg:hover,
+.note .bi-file-earmark-plus:hover {
+    color: #fff;
+}
+
+/* Nota fixada */
+.note.fixed {
+    background-color: #3c3c3f;
+}
+
+/* CONTROLE DO X */
+.note .bi-x-lg {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 5px;
+    font-size: .9rem;
+    color: #555;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 100;
+}
+
+/* X aparece ao passar o mouse na nota */
+.note:hover .bi-x-lg {
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #fff;
+}
+
+
+/* ========================= */
+/* RESPONSIVIDADE */
+/* ========================= */
+
+/* Tablets */
+@media (max-width: 768px) {
+
+    header {
+        padding: 1rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #serach-container {
+        width: 100%;
+        justify-content: center;
+    }
+
+    #search-input {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    #export-notes {
+        width: auto;
+    }
+
+    #add-note-container {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    #notes-container {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(220px, 1fr)
+        );
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .note {
+        min-height: 200px;
+    }
+}
+
+
+/* Celulares */
+@media (max-width: 480px) {
+
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    #serach-container {
+        flex-direction: column;
+        width: 100%;
+        gap: .8rem;
+    }
+
+    #search-input {
+        width: 100%;
+    }
+
+    #export-notes {
+        width: 100%;
+        padding: 10px;
+    }
+
+    #add-note-container {
+        width: 90%;
+        flex-direction: column;
+        gap: .7rem;
+    }
+
+    #add-note-container input,
+    #add-note-container button {
+        width: 100%;
+    }
+
+    #notes-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .note {
+        width: 100%;
+        min-height: 200px;
+    }
+
+    /*
+       No celular não dependemos
+       do hover para mostrar os controles.
+    */
+    .note .bi-x-lg,
+    .note .bi-file-earmark-plus {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
